@@ -283,6 +283,31 @@ Four types of memory Allocations ->
             . When we pass value from calldata to calldata the value is not copied same value is used. But if we pass value from calldata to memory 
               then another array is created. So in calldata to calldata gascost is less.
 
+Why string needs memory but uint does NOT
+✅ 1. uint is a value type → stored directly
+A uint is just a number.
+Solidity knows exactly where to store/pass it.
+It’s tiny and simple.
+✅ So no need to tell Solidity where to keep it.
+Example:
+function store(uint x) public {
+    // x is stored directly on stack
+}
+✅ 2. string is a reference type → stored somewhere else
+A string is actually:
+a pointer/reference to data stored in memory or storage
+dynamic size (can be 1 character or 1000 characters)
+So Solidity asks you:
+✅ "Where should I keep this string? In memory or in storage?"
+Because it's not obvious.
+That’s why you write:
+function add(string memory name) public {
+}
+
+
+You're telling Solidity:
+🧠 “Keep this temporary string inside memory during the function call.”
+
 
 #*** NOTE : Anything which is stored in storage can be passed in memory.
             Anything which is stored in memory cannot be passed in calldata.
