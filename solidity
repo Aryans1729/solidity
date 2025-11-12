@@ -317,7 +317,7 @@ You're telling Solidity:
   GAS Cost : calldata < memory < storage 
 
 
-
+# struct, mapping and arrays will be used memory as they are reference types
 
 
 #Note - 
